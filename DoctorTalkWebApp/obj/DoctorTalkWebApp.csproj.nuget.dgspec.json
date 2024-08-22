@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp\\DoctorTalkWebApp.csproj": {}
+    "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\DoctorTalkWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj": {
+    "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj",
         "projectName": "DoctorTalkWebApp.Data",
-        "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj",
+        "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp.Data\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -79,14 +79,14 @@
         }
       }
     },
-    "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp\\DoctorTalkWebApp.csproj": {
+    "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\DoctorTalkWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp\\DoctorTalkWebApp.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\DoctorTalkWebApp.csproj",
         "projectName": "DoctorTalkWebApp",
-        "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp\\DoctorTalkWebApp.csproj",
+        "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\DoctorTalkWebApp.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -108,8 +108,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\DocTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj"
+              "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj"
               }
             }
           }
