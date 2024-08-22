@@ -1,0 +1,13 @@
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\bin\Debug\net8.0\DoctorTalkWebApp.Data.deps.json
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\bin\Debug\net8.0\DoctorTalkWebApp.Data.dll
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\bin\Debug\net8.0\DoctorTalkWebApp.Data.pdb
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\DoctorTalkWebApp.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\DoctorTalkWebApp.Data.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\DoctorTalkWebApp.Data.AssemblyInfo.cs
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\DoctorTalkWebApp.Data.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\DoctorTalkWebApp.Data.sourcelink.json
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\DoctorTalkWebApp.Data.dll
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\refint\DoctorTalkWebApp.Data.dll
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\DoctorTalkWebApp.Data.pdb
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\ref\DoctorTalkWebApp.Data.dll
+C:\Users\Admin\Documents\GitHub\DocTalk\DoctorTalkWebApp.Data\obj\Debug\net8.0\DoctorTalkWebApp.Data.csproj.AssemblyReference.cache
