@@ -1,6 +1,7 @@
 ﻿using DoctorTalkWebApp.Data;
 using DoctorTalkWebApp.Data.Interfaces;
 using DoctorTalkWebApp.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoctorTalkWebApp.Services
 {
@@ -13,9 +14,10 @@ namespace DoctorTalkWebApp.Services
             _context = context;
         }
 
-        public Task Add(Post post)
+        public async Task Add(Post post)
         {
-            throw new NotImplementedException();
+            _context.Add(post);
+            await _context.SaveChangesAsync();
         }
 
         public Task Delete(int id)
@@ -35,7 +37,11 @@ namespace DoctorTalkWebApp.Services
 
         public Post GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Posts.Where(p => p.Id == id)
+                .Include(post => post.User)
+                .Include(post => post.Replies).ThenInclude(reply => reply.User)
+                .Include(post => post.Forum)
+                .First();
         }
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
@@ -45,7 +51,9 @@ namespace DoctorTalkWebApp.Services
 
         public IEnumerable<Post> GetPostsByForums(int id)
         {
-            throw new NotImplementedException();
+            return _context.Forums
+                .Where(forum => id == forum.Id).First()
+                .Posts;
         }
     }
 }

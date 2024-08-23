@@ -8,16 +8,16 @@ namespace DoctorTalkWebApp.Helpers
     {
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var smtpClient = new SmtpClient("smtp.example.com")
+            var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
-                Credentials = new NetworkCredential("your-email@example.com", "your-email-password"),
+                Credentials = new NetworkCredential("zgenhr@gmail.com", "xdse xmdf osrd gskt"),
                 EnableSsl = true,
             };
 
             var mailMessage = new MailMessage
             {
-                From = new MailAddress("your-email@example.com"),
+                From = new MailAddress("zgenhr@gmail.com"),
                 Subject = subject,
                 Body = htmlMessage,
                 IsBodyHtml = true,
