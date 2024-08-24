@@ -13,6 +13,54 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\app-logo-s.png",
+      "PackagePath": "staticwebassets\\images\\app-logo-s.png"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\forum\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\forum\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\front-splash.jpg",
+      "PackagePath": "staticwebassets\\images\\front-splash.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\pexels-karolina-grabowska-4386464.jpg",
+      "PackagePath": "staticwebassets\\images\\pexels-karolina-grabowska-4386464.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\pexels-karolina-grabowska-4386467.jpg",
+      "PackagePath": "staticwebassets\\images\\pexels-karolina-grabowska-4386467.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\theme\\bg-01.jpg",
+      "PackagePath": "staticwebassets\\images\\theme\\bg-01.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\user\\default-female-1.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\default-female-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\user\\default-female-2.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\default-female-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\user\\default-female-3.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\default-female-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\user\\default-male-1.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\default-male-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\user\\default-male-2.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\default-male-2.jpg"
+    },
+    {
       "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

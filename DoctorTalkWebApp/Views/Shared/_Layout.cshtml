@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<DoctorTalkWebAppUser> UserManager
+@inject SignInManager<DoctorTalkWebAppUser> SignInManager
+@{
+    if (SignInManager.IsSignedIn(User))
+    {
+        var user = UserManager.FindByNameAsync(User.Identity.Name);
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,30 +17,58 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DoctorTalkWebApp.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DoctorTalkWebApp</a>
+                <div class="navbar">
+                    <a class="navbar-brand navLogo" asp-controller="Home" asp-action="Index"></a>
+                </div>
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DoctorTalk</a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="Index">Forums</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" arida-haspopup="true" aria-expanded="false">
+                                    Settings<span class=""></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li role="separator" class="dropdown-divider"></li>
+                                    <li class="dropdown-header">Profile</li>
+                                    <li><a asp-controller="Profile" asp-action="Detail">My Profile</a></li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li role="separator" class="divider"></li>
+                                        <li class="dropdown-header">Admin</li>
+                                        <li><a asp-controller="Forum" asp-action="Create">Create Forum</a></li>
+                                        <li><a asp-controller="Profile" asp-action="Index">Users</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -39,7 +77,10 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - DoctorTalkWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - DoctorTalkWebApp 
+            <span class="material-symbols-outlined">
+                favorite
+            </span>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

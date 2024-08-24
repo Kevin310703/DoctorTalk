@@ -1,4 +1,9 @@
+using DoctorTalkWebApp.Data.Interfaces;
+using DoctorTalkWebApp.Data.Models;
 using DoctorTalkWebApp.Models;
+using DoctorTalkWebApp.Models.Forum;
+using DoctorTalkWebApp.Models.Home;
+using DoctorTalkWebApp.Models.Post;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +12,52 @@ namespace DoctorTalkWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IPost _postService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IPost postService)
         {
             _logger = logger;
+            _postService = postService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var model = BuildHomeIndexModel();
+            return View(model);
+        }
+
+        private HomeIndexModel BuildHomeIndexModel()
+        {
+            var lastestPosts = _postService.GetLastestPosts(10);
+
+            var posts = lastestPosts.Select(post => new PostListingModel
+            {
+                Id = post.Id,
+                Title = post.Title,
+                AuthorName = post.User.UserName,
+                AuthorId = post.User.Id,
+                AuthorRating = post.User.Rating,
+                DatePosted = post.Created.ToString(),
+                Forum = GetForumListingForPost(post)
+            });
+
+            return new HomeIndexModel
+            {
+                LastestPost = posts,
+                SearchQuery = ""
+            };
+        }
+
+        private ForumListingModel GetForumListingForPost(Post post)
+        {
+            var forum = post.Forum;
+
+            return new ForumListingModel
+            {
+                Id = forum.Id,
+                Name = forum.Title,
+                ForumImageUrl = forum.ImageUrl
+            };
         }
 
         public IActionResult Privacy()
