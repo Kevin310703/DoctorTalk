@@ -25,6 +25,14 @@
       "PackagePath": "staticwebassets\\images\\forum\\2.jpg"
     },
     {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\forum\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\front-splash-1.jpg",
+      "PackagePath": "staticwebassets\\images\\front-splash-1.jpg"
+    },
+    {
       "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\front-splash.jpg",
       "PackagePath": "staticwebassets\\images\\front-splash.jpg"
     },

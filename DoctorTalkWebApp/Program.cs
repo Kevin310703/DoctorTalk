@@ -11,7 +11,10 @@ var connectionString = builder.Configuration.GetConnectionString("DoctorTalkWebA
 
 builder.Services.AddDbContext<DoctorTalkWebAppContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<DoctorTalkWebAppUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DoctorTalkWebAppContext>();
+builder.Services.AddDefaultIdentity<DoctorTalkWebAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<DoctorTalkWebAppContext>();
+
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IForum, ForumService>();
 builder.Services.AddScoped<IPost, PostService>();

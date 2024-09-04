@@ -47,9 +47,13 @@ namespace DoctorTalkWebApp.Services
                 .First();
         }
 
-        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
-            throw new NotImplementedException();
+            return String.IsNullOrEmpty(searchQuery)
+                ? forum.Posts
+                : forum.Posts.Where(post
+                    => post.Title.Contains(searchQuery)
+                    || post.Content.Contains(searchQuery));
         }
 
         public IEnumerable<Post> GetLastestPosts(int n)

@@ -11,7 +11,7 @@ namespace DoctorTalkWebApp.Data.Interfaces
     {
         Post GetById(int id);
         IEnumerable<Post> GetAll();
-        IEnumerable<Post> GetFilteredPosts(string searchQuery);
+        IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery);
         IEnumerable<Post> GetPostsByForums(int id);
         IEnumerable<Post> GetLastestPosts(int n);
 

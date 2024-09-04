@@ -21,6 +21,29 @@ body {
     font-weight: bold;
 }
 
+.sectionHeader {
+    background-color: rgba(0,0,0,0.9);
+    padding: 8px 0 24px 24px;
+}
+
+.sectionHeading {
+    color: white;
+    font-size: 1.3em;
+    font-family: 'Roboto';
+    padding: 16px 0 16px 0;
+    border-bottom: 1px solid #335;
+    margin-bottom: 12px;
+}
+
+.sectionDescription {
+    color: #EEE;
+}
+
+.sectionInfo {
+    height: 400px;
+    background-color: white;
+}
+
 .frontPageSplash {
     background-image: url("/images/front-splash.jpg");
     background-repeat: no-repeat;
@@ -31,7 +54,6 @@ body {
 .frontPageLearn {
     font-family: 'Roboto';
     padding: 12px 0 0 32px;
-    height: 360px;
 }
 
 .frontPageHeading {
@@ -78,14 +100,53 @@ body {
 }
 
 #latestPosts {
-    font-size: 1.2em;
+    font-size: 1.6em;
     font-weight: bold;
     color: #333;
     margin: 4px 0 16px 0;
-    background-image: url("/images/forum/1.jpg");
 }
 
+/*#latestPostsTable td {
+    display: flex;
+}*/
+
+.forumLogo {
+    width: 50px;
+    height: 50px;
+    border-radius: 3px;
+    float: left;
+    border: 1px solid #555;
+    background-color: #ddd;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+/*Forum Topic Page*/
+.searchBar {
+    padding: 3px 5px 2px 12px;
+    margin: 8px;
+    background-color: #333;
+    width: 10%;
+    transition: ease .3s;
+    border: none;
+}
+
+.searchBar:focus {
+    color: black;
+    width: 60%;
+    background-color: #fff;
+}
+
+
 /*Post Page*/
+.postHeading {
+    color: white;
+    font-size: 1.2em;
+    font-family: 'Roboto';
+    padding: 16px 0 16px 0;
+}
+
 .postTitle {
     font-family: 'Roboto';
     font-weight: bold;
@@ -114,6 +175,121 @@ body {
     height: 40px;
     width: 40px;
     background-color: #ddd;
+}
+
+.postAuthorImage {
+    height: 80px;
+    width: 80px;
+    background-size: 100%;
+}
+
+.postAuthorContainer {
+    padding: 12px;
+    color: #444;
+    font-family: 'Roboto';
+/*    width: 190px;*/
+}
+
+.postIndexTitle {
+    font-size: 1.4em;
+}
+
+.postContentContainer {
+    color: #222;
+    font-family: 'Roboto';
+    padding: 22px;
+    border: 1px solid #ddd;
+}
+
+.postAuthorRating {
+    font-size: 0.9em;
+    color: #159;
+    font-family: 'Roboto Mono';
+}
+
+#postIndexContext {
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 6px 6px rgba(0,0,0,0.3);
+}
+
+.postHeader {
+    background-color: #212121;
+    padding: 20px 0px 20px 20px;
+}
+
+#headingBtn {
+    float: right;
+    margin-right: 20px;
+}
+
+/*Custom Button*/
+.btn-back {
+    background-color: #555;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+.btn-back:hover {
+    transition: ease-in 0.1s;
+    background-color: #1E88E5 !important;
+}
+
+.btn-newReply {
+    background-color: #5C6BC0 !important;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+.btn-newReply:hover {
+    transition: ease-in 0.1s;
+    background-color: #9FA8DA !important;
+}
+
+.btn-file {
+    background-color: #4FC3F7;
+    color: white;
+    transition: ease 0.3s;
+    width: 100%;
+}
+
+.btn-file:hover {
+    transition: ease 0.3s;
+    background-color: #039BE5;
+}
+
+.btn-newPost {
+    background-color: #c62828 !important;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+.btn-newPost:hover {
+    transition: ease-in 0.1s;
+    background-color: #e53935 !important;
+    color: #fff !important;
+}
+
+.btn-submitPost {
+    background-color: #00695C !important;
+    color: #fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+.btn-submitPost:hover {
+    transition: ease-in 0.1s;
+    background-color: #00897B !important;
+    color: #fff !important;
+}
+
+.btn-forumSearch {
+    background-color: none !important;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
 }
 
 /*Forum Index*/
@@ -152,8 +328,6 @@ body {
     font-family: 'Roboto Mono';
 }
 
-.createPostSection
-
 
 html {
     font-size: 14px;
@@ -176,4 +350,9 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+body-content {
+    padding-left: 15px;
+    padding-right: 15px;
 }

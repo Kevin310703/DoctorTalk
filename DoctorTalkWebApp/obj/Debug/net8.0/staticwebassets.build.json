@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uP+6uy6V1uOf/+StfmNFVw/EhtyHhl6A4v4dEKcE4GM=",
+  "Hash": "ew714UZYdiSGFRUoNMJjxekvp7RYLnLiIfR33ZYmEmA=",
   "Source": "DoctorTalkWebApp",
   "BasePath": "_content/DoctorTalkWebApp",
   "Mode": "Default",
@@ -1290,6 +1290,25 @@
       "OriginalItemSpec": "wwwroot\\images\\forum\\2.jpg"
     },
     {
+      "Identity": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\forum\\3.jpg",
+      "SourceId": "DoctorTalkWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\",
+      "BasePath": "_content/DoctorTalkWebApp",
+      "RelativePath": "images/forum/3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\forum\\3.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\front-splash.jpg",
       "SourceId": "DoctorTalkWebApp",
       "SourceType": "Discovered",
@@ -1307,6 +1326,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\front-splash.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\front-splash-1.jpg",
+      "SourceId": "DoctorTalkWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\",
+      "BasePath": "_content/DoctorTalkWebApp",
+      "RelativePath": "images/front-splash-1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\front-splash-1.jpg"
     },
     {
       "Identity": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\pexels-karolina-grabowska-4386464.jpg",
