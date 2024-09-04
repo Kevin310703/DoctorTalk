@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DoctorTalkWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd37fede8639074b3911ed0d5bbe571fa30b10cf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10da08e15d9d25e5f852c58df3f9a65ce3efcc44")]
 [assembly: System.Reflection.AssemblyProductAttribute("DoctorTalkWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DoctorTalkWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

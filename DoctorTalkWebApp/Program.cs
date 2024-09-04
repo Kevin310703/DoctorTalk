@@ -18,10 +18,18 @@ builder.Services.AddDefaultIdentity<DoctorTalkWebAppUser>(options => options.Sig
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IForum, ForumService>();
 builder.Services.AddScoped<IPost, PostService>();
+
+builder.Services.AddTransient<DataSeeder>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var dataSeeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+    await dataSeeder.SeedSuperUser(); // Call the seed method here
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
