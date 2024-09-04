@@ -3,23 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:services\\postservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\views\\search\\results.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:views\\search\\results.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{91091153-E031-4188-A636-8F232C0FE78D}|..\\DoctorTalkWebApp.Data\\DoctorTalkWebApp.Data.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp.data\\interfaces\\ipost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\views\\forum\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:views\\forum\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\models\\search\\searchresultmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:models\\search\\searchresultmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\controllers\\forumcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:controllers\\forumcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\views\\forum\\topic.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:views\\forum\\topic.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|c:\\users\\admin\\documents\\github\\doctortalk\\doctortalkwebapp\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{39E66FFC-016D-45E2-9F5E-ED2975216703}|DoctorTalkWebApp.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,71 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PostService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Services\\PostService.cs",
-              "RelativeDocumentMoniker": "Services\\PostService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Services\\PostService.cs",
-              "RelativeToolTip": "Services\\PostService.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAswDMAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T17:03:34.908Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "IPost.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp.Data\\Interfaces\\IPost.cs",
-              "RelativeDocumentMoniker": "..\\DoctorTalkWebApp.Data\\Interfaces\\IPost.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp.Data\\Interfaces\\IPost.cs",
-              "RelativeToolTip": "..\\DoctorTalkWebApp.Data\\Interfaces\\IPost.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAkAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T17:03:05.204Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Views\\Forum\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Forum\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Views\\Forum\\Index.cshtml",
+              "RelativeToolTip": "Views\\Forum\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-04T18:39:41.352Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ForumController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Controllers\\ForumController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ForumController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Controllers\\ForumController.cs",
-              "RelativeToolTip": "Controllers\\ForumController.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAA3wCcAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T17:00:26.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "wwwroot\\css\\site.css",
-              "ViewState": "AgIAABgAAAAAAAAAAADwvyYAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-08-23T09:11:44.864Z",
+              "DocumentIndex": 0,
+              "Title": "Results.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Views\\Search\\Results.cshtml",
+              "RelativeDocumentMoniker": "Views\\Search\\Results.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Views\\Search\\Results.cshtml",
+              "RelativeToolTip": "Views\\Search\\Results.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-04T18:27:27.328Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Topic.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Views\\Forum\\Topic.cshtml",
-              "RelativeDocumentMoniker": "Views\\Forum\\Topic.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Views\\Forum\\Topic.cshtml",
-              "RelativeToolTip": "Views\\Forum\\Topic.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAwAAABMAAAAAAAAAA==",
+              "Title": "SearchResultModel.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Models\\Search\\SearchResultModel.cs",
+              "RelativeDocumentMoniker": "Models\\Search\\SearchResultModel.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Models\\Search\\SearchResultModel.cs",
+              "RelativeToolTip": "Models\\Search\\SearchResultModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T18:23:42.023Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SearchController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Controllers\\SearchController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SearchController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Controllers\\SearchController.cs",
+              "RelativeToolTip": "Controllers\\SearchController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwAUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T18:14:13.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ForumController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Controllers\\ForumController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ForumController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Controllers\\ForumController.cs",
+              "RelativeToolTip": "Controllers\\ForumController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T18:12:29.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-25T07:32:58.118Z",
+              "WhenOpened": "2024-09-04T18:12:04.083Z",
               "EditorCaption": ""
             }
           ]
