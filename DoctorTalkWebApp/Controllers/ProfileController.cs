@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 
 namespace DoctorTalkWebApp.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly UserManager<DoctorTalkWebAppUser> _userManager;
@@ -23,7 +24,6 @@ namespace DoctorTalkWebApp.Controllers
             _configuration = configuration;
         }
 
-        [Authorize]
         public IActionResult Detail(string id)
         {
             var user = _userService.GetById(id);
@@ -67,6 +67,7 @@ namespace DoctorTalkWebApp.Controllers
             return RedirectToAction("Detail", "Profile", new { id = userId });
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             var profiles = _userService.GetAll()

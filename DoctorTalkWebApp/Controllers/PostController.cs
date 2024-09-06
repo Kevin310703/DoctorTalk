@@ -3,6 +3,7 @@ using DoctorTalkWebApp.Data.Interfaces;
 using DoctorTalkWebApp.Data.Models;
 using DoctorTalkWebApp.Models.Post;
 using DoctorTalkWebApp.Models.Reply;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,6 +52,7 @@ namespace DoctorTalkWebApp.Controllers
             return View(model);
         }
 
+        [Authorize]
         public IActionResult Create(int id)
         {
             var forum = _forumService.GetById(id);
@@ -67,6 +69,7 @@ namespace DoctorTalkWebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddPost(NewPostModel model)
         {
             var userId = _userManager.GetUserId(User);

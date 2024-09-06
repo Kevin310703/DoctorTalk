@@ -3,6 +3,7 @@ using DoctorTalkWebApp.Data.Models;
 using DoctorTalkWebApp.Models.Forum;
 using DoctorTalkWebApp.Models.Post;
 using DoctorTalkWebApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Net.Http.Headers;
@@ -79,7 +80,8 @@ namespace DoctorTalkWebApp.Controllers
         {
             return RedirectToAction("Topic", new {id, searchQuery });
         }
-        
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             var model = new AddForumModel();
@@ -87,6 +89,7 @@ namespace DoctorTalkWebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddForum(AddForumModel model)
         {
             var imageUri = "/images/user/default-female-1.jpg";

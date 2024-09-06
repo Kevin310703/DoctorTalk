@@ -2,11 +2,13 @@
 using DoctorTalkWebApp.Data.Interfaces;
 using DoctorTalkWebApp.Data.Models;
 using DoctorTalkWebApp.Models.Reply;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorTalkWebApp.Controllers
 {
+    [Authorize]
     public class ReplyController : Controller
     {
         private readonly IPost _postService;
