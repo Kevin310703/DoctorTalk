@@ -11,7 +11,7 @@ namespace DoctorTalkWebApp.Data.Interfaces
         DoctorTalkWebAppUser GetById(string id);
         IEnumerable<DoctorTalkWebAppUser> GetAll();
 
-        Task IncrementRating(string id);
+        Task UpdateUserRating(string userId, Type type);
         Task Add(DoctorTalkWebAppUser user);
         Task Deactivate(DoctorTalkWebAppUser user);
         Task SetProfileImage(string id, Uri uri);
