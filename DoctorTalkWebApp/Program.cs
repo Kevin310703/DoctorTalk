@@ -9,6 +9,9 @@ using DoctorTalkWebApp.Services;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DoctorTalkWebAppContextConnection") ?? throw new InvalidOperationException("Connection string 'DoctorTalkWebAppContextConnection' not found.");
 
+builder.Configuration
+    .AddJsonFile("StorageSettings.json", optional: false, reloadOnChange: true);
+
 builder.Services.AddDbContext<DoctorTalkWebAppContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<DoctorTalkWebAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -18,7 +21,9 @@ builder.Services.AddDefaultIdentity<DoctorTalkWebAppUser>(options => options.Sig
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IForum, ForumService>();
 builder.Services.AddScoped<IPost, PostService>();
-
+builder.Services.AddScoped<IUpload, UploadService>();
+builder.Services.AddScoped<IApplicationUser, ApplicationUserService>();
+builder.Services.AddSingleton(builder.Configuration);
 builder.Services.AddTransient<DataSeeder>();
 
 // Add services to the container.

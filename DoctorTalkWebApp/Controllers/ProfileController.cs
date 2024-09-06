@@ -4,6 +4,7 @@ using DoctorTalkWebApp.Models.ApplicationUser;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 
 namespace DoctorTalkWebApp.Controllers
 {
@@ -48,23 +49,23 @@ namespace DoctorTalkWebApp.Controllers
          * In addition to the local file system, files can be streamed to Azure Blob storage or Entity Framework.
          */
 
-        //[HttpPost]
-        //public async Task<IActionResult> UploadProfileImage(IFormFile file)
-        //{
-        //    var userId = _userManager.GetUserId(User);
-        //    var connectionString = _configuration.GetConnectionString("AzureStorageAccountConnectionString");
-        //    var container = _uploadService.GetBlobContainer(connectionString);
+        [HttpPost]
+        public async Task<IActionResult> UploadProfileImage(IFormFile file)
+        {
+            var userId = _userManager.GetUserId(User);
+            var connectionString = _configuration.GetConnectionString("AzureStorageAccountConnectionString");
+            var container = _uploadService.GetBlobContainer(connectionString);
 
-        //    var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-        //    var filename = Path.Combine(parsedContentDisposition.FileName.Trim('"'));
+            var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+            var filename = Path.Combine(parsedContentDisposition.FileName.Trim('"'));
 
-        //    var blockBlob = container.GetBlockBlobReference(filename);
+            var blockBlob = container.GetBlockBlobReference(filename);
 
-        //    await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
-        //    await _userService.SetProfileImage(userId, blockBlob.Uri);
+            await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+            await _userService.SetProfileImage(userId, blockBlob.Uri);
 
-        //    return RedirectToAction("Detail", "Profile", new { id = userId });
-        //}
+            return RedirectToAction("Detail", "Profile", new { id = userId });
+        }
 
         //public IActionResult Index()
         //{
