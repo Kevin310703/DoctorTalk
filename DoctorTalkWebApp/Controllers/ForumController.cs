@@ -31,7 +31,11 @@ namespace DoctorTalkWebApp.Controllers
                 {
                     Id = forum.Id,
                     Name = forum.Title,
-                    Description = forum.Description
+                    Description = forum.Description,
+                    NumberOfPosts = forum.Posts?.Count() ?? 0,
+                    NumberOfUsers = _forumService.GetActiveUsers(forum.Id).Count(),
+                    ForumImageUrl = forum.ImageUrl,
+                    HasRecentPost = _forumService.HasRecentPost(forum.Id)
                 });
 
             var model = new Models.Forum.ForumIndexModel

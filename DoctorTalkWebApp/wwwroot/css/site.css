@@ -322,6 +322,22 @@ body {
     font-family: 'Roboto';
 }
 
+/*Create Post*/
+.createPostSection {
+    background-color: #fff;
+    padding: 24px;
+}
+
+.authorBlock {
+    padding: 18px;
+    border: 1px dashed #00AFCF;
+    margin-bottom: 8px;
+}
+
+.noBorder {
+    border: none;
+}
+
 .noPosts {
     text-align: center;
     padding-top: 30px;
@@ -355,6 +371,62 @@ body {
     font-size: 1.7em;
 }
 
+.userProfilePic {
+    height: 140px;
+    width: 100px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+/*Replies*/
+#replyDivider {
+    height: 2px;
+    margin-bottom: 12px;
+}
+
+.replyContent {
+    display: table;
+    background-color: #fff;
+    border-bottom: 1px solid #aaa;
+    width: inherit;
+}
+
+#postReplyRow {
+    background-color: #3F5185;
+    padding: 8px;
+}
+
+.replyContentContainer, .replyAuthorContainer {
+    display: table-cell;
+    padding: 12px;
+}
+
+.isAdmin {
+    display: inline-block;
+    padding: 3px;
+    background-color: #FFEB3B;
+    color: #000;
+    font-family: 'Roboto Mono';
+}
+
+.smaller {
+    font-size: 0.8em;
+}
+
+#originalPost {
+    background-color: #fff;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.hasRecentPost {
+    padding: 2px;
+    background-color: #fe552f;
+    color: #fff;
+    text-align: center;
+    border-radius: 1px;
+    width: 30px;
+}
 
 html {
     font-size: 14px;

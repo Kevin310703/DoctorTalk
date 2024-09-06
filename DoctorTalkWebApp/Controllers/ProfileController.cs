@@ -67,26 +67,26 @@ namespace DoctorTalkWebApp.Controllers
             return RedirectToAction("Detail", "Profile", new { id = userId });
         }
 
-        //public IActionResult Index()
-        //{
-        //    var profiles = _userService.GetAll()
-        //        .OrderByDescending(user => user.Rating)
-        //        .Select(u => new ProfileModel
-        //        {
-        //            Email = u.Email,
-        //            ProfileImageUrl = u.ProfileImageUrl,
-        //            UserRating = u.Rating.ToString(),
-        //            DateJoined = u.MemberSince,
-        //            IsActive = u.IsActive
-        //        });
+        public IActionResult Index()
+        {
+            var profiles = _userService.GetAll()
+                .OrderByDescending(user => user.Rating)
+                .Select(u => new ProfileModel
+                {
+                    Email = u.Email,
+                    UserName = u.UserName,
+                    ProfileImageUrl = u.ProfileImageUrl,
+                    UserRating = u.Rating.ToString(),
+                    MemberSince  = u.MemberSince
+                });
 
-        //    var model = new ProfileListModel
-        //    {
-        //        Profiles = profiles
-        //    };
+            var model = new ProfileListModel
+            {
+                Profiles = profiles
+            };
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
         public IActionResult Deactivate(string userId)
         {

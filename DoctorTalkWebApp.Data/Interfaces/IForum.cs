@@ -17,5 +17,7 @@ namespace DoctorTalkWebApp.Data.Interfaces
         Task Delete(int forumId);
         Task UpdateForumTitle(int forumId, string newTitle);
         Task UpdateForumDescription(int forumId, string newDescription);
+        IEnumerable<DoctorTalkWebAppUser> GetActiveUsers(int id);
+        bool HasRecentPost(int id);
     }
 }
