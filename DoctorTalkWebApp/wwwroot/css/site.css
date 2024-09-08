@@ -24,6 +24,7 @@ body {
 .sectionHeader {
     background-color: rgba(0,0,0,0.9);
     padding: 8px 0 24px 24px;
+    margin-bottom: 5px;
 }
 
 .sectionHeading {
@@ -45,7 +46,7 @@ body {
 }
 
 .frontPageSplash {
-    background-image: url("/images/front-splash.jpg");
+    background-image: url("/images/front-splash-2.jpg");
     background-repeat: no-repeat;
     background-position: right;
     background-size: cover;
@@ -83,6 +84,7 @@ body {
     font-family: Arial;
     font-weight: bold;
     transition: ease-in 0.2s;
+    margin-bottom: 10px;
 }
 
 .homeSearch:focus {
@@ -105,10 +107,6 @@ body {
     color: #333;
     margin: 4px 0 16px 0;
 }
-
-/*#latestPostsTable td {
-    display: flex;
-}*/
 
 .forumLogo {
     width: 50px;
@@ -342,6 +340,7 @@ body {
     text-align: center;
     padding-top: 30px;
     font-family: 'Roboto Mono';
+    background-color: #fff;
 }
 
 /*User Profile*/

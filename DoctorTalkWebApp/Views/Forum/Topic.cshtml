@@ -76,7 +76,9 @@
         else
         {
             <div class="noPosts">
-                <i class="material-icons md-72">question_answer</i>
+                <span class="material-symbols-outlined">
+                    forum
+                </span>
                 <h3>
                     It looks like there are no @Model.Forum.Name posts yet. <br />
                     Why not <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id"><span>Create One?</span></a>

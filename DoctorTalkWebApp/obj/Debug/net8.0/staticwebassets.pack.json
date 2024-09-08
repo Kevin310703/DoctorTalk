@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\images\\front-splash-1.jpg"
     },
     {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\front-splash-2.jpg",
+      "PackagePath": "staticwebassets\\images\\front-splash-2.jpg"
+    },
+    {
       "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\front-splash.jpg",
       "PackagePath": "staticwebassets\\images\\front-splash.jpg"
     },
