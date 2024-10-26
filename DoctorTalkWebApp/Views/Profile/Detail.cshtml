@@ -3,38 +3,103 @@
 
 @inject UserManager<DoctorTalkWebAppUser> UserManager
 
-<div class="container body-content">
-    <div class="row sectionHeader">
-        <div class="sectionHeading noBorder">
-            User Profile
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container body-content mb-5">
+    <div class="row sectionHeader mb-4">
+        <div class="col">
+            <h2 class="sectionHeading">User Profile</h2>
+            <p class="text-muted">Review your personal details and update any outdated information 
+                to ensure you have the best possible experience with our services.</p>
         </div>
     </div>
     @if (Context.User.Identity.IsAuthenticated)
     {
-        <div class="row userProfile">
-            <div class="col-md-4">
-                <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl); background-size:100%;"></div>
-                @if (Context.User.Identity.Name == Model.UserName)
-                {
-                    <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
-                        <div id="upload">
-                            <label class="btn btn-default btn-file">
-                                Browse <input type="file" name="file" style="display: none;">
-                            </label>
-                        </div>
-                        <button type="submit" id="btn-profile" class="btn btn-outline-primary">Submit</button>
-                    </form>
-                }
+        <div class="row userProfile shadow-lg p-4 rounded">
+            <div class="col-md-4 text-center">
+                <!-- Ảnh profile với đường viền đẹp -->
+                <div id="userProfileImage" class="rounded-circle mb-3 mx-auto shadow"
+                     style="background-image: url('@Model.ProfileImageUrl');
+                            background-size: cover;
+                            background-position: center;
+                            width: 200px;
+                            height: 200px;
+                            border: 6px solid #007bff;
+                            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                            transition: transform 0.2s;">
+                </div>
             </div>
             <div class="col-md-8">
-                <span id="userName">@Model.UserName</span>
-                @if (@Model.IsAdmin)
-                {
-                    <span class="isAdmin">Admin</span>
-                }
-                <span id="userRating">Current Rating: @Model.UserRating</span>
-                <span id="userEmailLabel">Email: @Model.Email</span>
-                <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
+                <!-- Hiển thị thông tin người dùng -->
+                <h4 class="mb-3 d-flex align-items-center">
+                    <i class="fas fa-user"></i> <strong class="ms-2">@Model.FullName</strong>
+                    @if (@Model.IsAdmin)
+                    {
+                        <span class="badge bg-success ms-3" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
+                            <i class="fas fa-user-shield"></i> Admin
+                        </span>
+                    }
+                </h4>
+
+                <p><i class="fas fa-star"></i> <strong>Rating:</strong> @Model.UserRating</p>
+                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> @Model.Email</p>
+                <p><i class="fas fa-calendar-alt"></i> <strong>Member Since:</strong> @Model.MemberSince.ToShortDateString()</p>
+
+                <!-- Hiển thị thêm các trường thông tin -->
+                <p><i class="fas fa-phone"></i> <strong>Phone Number:</strong> @Model.PhoneNumber</p>
+                <p><i class="fas fa-stethoscope"></i> <strong>Specialization:</strong> @Model.Specialization</p>
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> @Model.Address</p>
+                <p><i class="fas fa-id-card"></i> <strong>License Number:</strong> @Model.LicenseNumber</p>
+                <p><i class="fas fa-file-alt"></i> <strong>Biography:</strong> @Model.Biography</p>
+
+                <!-- Button Chuyển sang trang chỉnh sửa hồ sơ -->
+                <div class="mt-4">
+                    @if (Model.UserId != null)
+                    {
+                        <a class="btn btn-primary btn-lg shadow-sm rounded-pill"
+                           asp-controller="Profile"
+                           asp-action="Edit"
+                           asp-route-id="@Model.UserId">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                    }
+                    else
+                    {
+                        <p>User ID is missing.</p>
+                    }
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col">
+                    <h3>User's Posts</h3>
+                    @if (Model.Posts != null && Model.Posts.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var post in Model.Posts)
+                            {
+                                <li class="list-group-item">
+                                    <h5>
+                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                    </h5>
+                                    <p class="text-muted">
+                                        Posted on @post.Created.ToString("MM/dd/yyyy") in
+                                        <a asp-controller="Forum" asp-action="Topic" asp-route-id="@post.Forum.Id">@post.Forum.Title</a>
+                                    </p>
+                                    <p>@Html.Raw(post.Content.Length > 200 ? post.Content.Substring(0, 200) + "..." : post.Content)</p>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>This user hasn't made any posts yet.</p>
+                    }
+                </div>
             </div>
         </div>
     }

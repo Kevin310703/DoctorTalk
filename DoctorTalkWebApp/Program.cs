@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DoctorTalkWebApp.Data;
 using DoctorTalkWebApp.Helpers;
@@ -30,6 +30,7 @@ builder.Services.AddTransient<DataSeeder>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
 using (var scope = app.Services.CreateScope())
 {
     var dataSeeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();

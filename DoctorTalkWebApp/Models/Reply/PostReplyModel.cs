@@ -1,4 +1,6 @@
-﻿namespace DoctorTalkWebApp.Models.Reply
+﻿using DoctorTalkWebApp.Data.Models;
+
+namespace DoctorTalkWebApp.Models.Reply
 {
     public class PostReplyModel
     {
@@ -10,7 +12,11 @@
         public bool IsAuthorAdmin { get; set; }
 
         public DateTime Created { get; set; }
+        public DateTime Updated { get; set; }
         public string? ReplyContent { get; set; }
+        public int? ParentReplyId { get; set; }
+        public PostReplyModel ParentReply { get; set; }
+        public List<PostReplyModel> ChildReplies { get; set; } = new List<PostReplyModel>(); // List of child replies
 
         public int PostId { get; set; }
         public string? PostTitle { get; set; }

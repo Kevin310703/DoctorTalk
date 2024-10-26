@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoctorTalkWebApp.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,10 @@ namespace DoctorTalkWebApp.Data.Interfaces
     {
         DoctorTalkWebAppUser GetById(string id);
         IEnumerable<DoctorTalkWebAppUser> GetAll();
+
+        Doctor GetDoctorById(int doctorId);
+        IQueryable<Doctor> GetAllDoctors();
+        Doctor GetDoctorByUserId(string userId);
 
         Task UpdateUserRating(string userId, Type type);
         Task Add(DoctorTalkWebAppUser user);

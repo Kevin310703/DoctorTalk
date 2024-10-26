@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\app-logo-s.ico",
+      "PackagePath": "staticwebassets\\images\\app-logo-s.ico"
+    },
+    {
       "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\app-logo-s.png",
       "PackagePath": "staticwebassets\\images\\app-logo-s.png"
     },
@@ -27,6 +31,10 @@
     {
       "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\forum\\3.jpg",
       "PackagePath": "staticwebassets\\images\\forum\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\forum\\97d72a56-2410-4bb5-9ffb-afc8f416c20f_blog-article-13.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\97d72a56-2410-4bb5-9ffb-afc8f416c20f_blog-article-13.jpg"
     },
     {
       "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\front-splash-1.jpg",
@@ -71,6 +79,14 @@
     {
       "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\user\\default-male-2.jpg",
       "PackagePath": "staticwebassets\\images\\user\\default-male-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\user\\profiles\\1c326cdc-3bd8-4204-9f74-87d417ab4cd6.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\profiles\\1c326cdc-3bd8-4204-9f74-87d417ab4cd6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\images\\user\\profiles\\92ac39d9-358c-4f12-b9ff-37a428478628.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\profiles\\92ac39d9-358c-4f12-b9ff-37a428478628.jpg"
     },
     {
       "Id": "C:\\Users\\Admin\\Documents\\GitHub\\DoctorTalk\\DoctorTalkWebApp\\wwwroot\\js\\site.js",

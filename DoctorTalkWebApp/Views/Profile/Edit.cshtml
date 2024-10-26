@@ -1,0 +1,179 @@
+﻿@model DoctorTalkWebApp.Models.ApplicationUser.ProfileModel
+
+@{
+    ViewData["Title"] = "Edit User Profile";
+}
+
+<div class="container body-content">
+    <div class="row sectionHeader mb-4">
+        <div class="col">
+            <h2 class="sectionHeading">Edit User Profile</h2>
+            <p class="text-muted">Update your profile to ensure everything is accurate and enjoy the best experience with us.</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 p-0 userProfile shadow-lg rounded bg-white p-4">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data" id="editForm">
+                <input type="hidden" asp-for="UserId" />
+                <!-- Thêm trường ẩn để lưu giá trị ProfileImageUrl hiện tại -->
+                <input type="hidden" asp-for="ProfileImageUrl" />
+
+                <div class="row">
+                    <!-- Bên trái: Ảnh profile và Upload ảnh mới -->
+                    <div class="col-md-4 text-center">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold mb-2">Profile Picture</label>
+                            <div class="userProfilePic rounded-circle mb-3 mx-auto"
+                                 id="profileImageContainer"
+                                 style="background-image: url('@Model.ProfileImageUrl?v=@DateTime.Now.Ticks');
+                                        background-size: cover;
+                                        background-position: center;
+                                        width: 150px;
+                                        height: 150px;
+                                        border: 4px solid #007bff;">
+                            </div>
+                        </div>
+
+                        <!-- Upload ảnh mới bên dưới ảnh hiện tại -->
+                        <div class="form-group mb-3">
+                            <label for="ImageUpLoad" class="font-weight-bold">Upload New Profile Image</label>
+                            <input type="file" name="ImageUpLoad" class="form-control form-control-lg shadow-sm" accept="image/*" id="profileImageInput" />
+                        </div>
+                    </div>
+
+                    <!-- Bên phải: Các trường thông tin -->
+                    <div class="col-md-8">
+                        <!-- UserName -->
+                        <div class="form-group mb-3">
+                            <label asp-for="FullName" class="font-weight-bold">FullName</label>
+                            <input asp-for="FullName" class="form-control form-control-lg shadow-sm border-primary" data-original="@Model.FullName" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <!-- UserName -->
+                        <div class="form-group mb-3">
+                            <label asp-for="UserName" class="font-weight-bold">Username</label>
+                            <input asp-for="UserName" class="form-control form-control-lg shadow-sm border-primary" data-original="@Model.UserName" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="font-weight-bold">Email</label>
+                            <input asp-for="Email" class="form-control form-control-lg shadow-sm border-primary" data-original="@Model.Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- PhoneNumber -->
+                        <div class="form-group mb-3">
+                            <label asp-for="PhoneNumber" class="font-weight-bold">Phone Number</label>
+                            <input asp-for="PhoneNumber" class="form-control form-control-lg shadow-sm border-primary" data-original="@Model.PhoneNumber" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <!-- Specialization dưới dạng dropdown -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Specialization" class="font-weight-bold">Specialization</label>
+                            <select asp-for="Specialization" class="form-control form-control-lg shadow-sm border-primary" data-original="@Model.Specialization">
+                                <option value="">-- Select Specialization --</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Dermatology">Dermatology</option>
+                                <option value="Pediatrics">Pediatrics</option>
+                                <option value="Neurology">Neurology</option>
+                                <option value="Oncology">Oncology</option>
+                                <option value="Orthopedics">Orthopedics</option>
+                            </select>
+                            <span asp-validation-for="Specialization" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="LicenseNumber" class="font-weight-bold">LicenseNumber</label>
+                            <input asp-for="LicenseNumber" class="form-control form-control-lg shadow-sm border-primary" data-original="@Model.LicenseNumber" />
+                            <span asp-validation-for="LicenseNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Biography" class="font-weight-bold">Biography</label>
+                            <input asp-for="Biography" class="form-control form-control-lg shadow-sm border-primary" data-original="@Model.Biography" />
+                            <span asp-validation-for="Biography" class="text-danger"></span>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Address" class="font-weight-bold">Address</label>
+                            <input asp-for="Address" class="form-control form-control-lg shadow-sm border-primary" data-original="@Model.Address" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Changes và Cancel button nằm gần nhau -->
+                <div class="row mt-3">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-success btn-lg shadow-sm rounded-pill me-2">Save Changes</button>
+                        <a asp-action="Index" class="btn btn-secondary btn-lg shadow-sm rounded-pill ms-2">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Script for image preview và kiểm tra thay đổi -->
+<script>
+    document.getElementById('profileImageInput').addEventListener('change', function (event) {
+        var profileImageContainer = document.getElementById('profileImageContainer');
+        profileImageContainer.style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
+        profileImageContainer.onload = function () {
+            URL.revokeObjectURL(profileImageContainer.style.backgroundImage); // Free memory after image is loaded
+        }
+
+        // Đặt cờ để nhận biết ảnh đại diện đã được thay đổi
+        document.getElementById('profileImageInput').setAttribute('data-changed', 'true');
+    });
+
+    // Kiểm tra thay đổi trước khi submit
+    document.getElementById('editForm').addEventListener('submit', function (e) {
+        let inputs = document.querySelectorAll('[data-original]');
+        let imageChanged = document.getElementById('profileImageInput').getAttribute('data-changed') === 'true';
+        let hasChanged = imageChanged; // Đặt cờ mặc định là thay đổi ảnh
+
+        // Kiểm tra từng trường xem có thay đổi so với giá trị ban đầu không
+        inputs.forEach(function (input) {
+            if (input.value !== input.getAttribute('data-original')) {
+                hasChanged = true;
+            }
+        });
+
+        if (!hasChanged) {
+            e.preventDefault(); // Ngăn không cho form submit
+            Swal.fire({
+                title: 'No Changes Detected!',
+                text: 'You have not made any changes to your profile.',
+                icon: 'info',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#007bff'
+            });
+        } else {
+            e.preventDefault(); // Ngăn không cho form submit ban đầu
+
+            Swal.fire({
+                title: 'Changes Detected',
+                text: 'You have made changes. Are you sure you want to save?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, save it!',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#d33'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Sử dụng submit trực tiếp khi người dùng xác nhận
+                    document.getElementById('editForm').submit();
+                }
+            });
+        }
+    });
+</script>
+

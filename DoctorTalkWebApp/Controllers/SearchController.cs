@@ -25,12 +25,12 @@ namespace DoctorTalkWebApp.Controllers
             {
                 Id = post.Id,
                 Forum = BuildForumListing(post),
-                AuthorName = post.User.UserName,
-                AuthorId = post.User.Id,
-                AuthorRating = post.User.Rating,
+                AuthorName = post.User?.UserName ?? "Unknown",
+                AuthorId = post.User?.Id ?? "Unknown",
+                AuthorRating = post.Doctor?.Rating ?? 0,
                 Title = post.Title,
                 DatePosted = post.Created.ToString(),
-                RepliesCount = post.Replies.Count()
+                RepliesCount = post.Replies?.Count() ?? 0
             }).OrderByDescending(post => post.DatePosted);
 
             var model = new SearchResultModel

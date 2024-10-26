@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace DoctorTalkWebApp.Data
             _context = context;
         }
 
-        public Task SeedSuperUser()
+        public async Task SeedSuperUser()
         {
             var roleStore = new RoleStore<IdentityRole>(_context);
             var userStore = new UserStore<DoctorTalkWebAppUser>(_context);
@@ -25,7 +26,7 @@ namespace DoctorTalkWebApp.Data
             var user = new DoctorTalkWebAppUser
             {
                 UserName = "ForumAdmin",
-                NormalizedUserName = "forumadmin",
+                NormalizedUserName = "FORUMADMIN",
                 Email = "admin@gmail.com",
                 EmailConfirmed = true,
                 LockoutEnabled = false,
@@ -33,25 +34,22 @@ namespace DoctorTalkWebApp.Data
             };
 
             var hasher = new PasswordHasher<DoctorTalkWebAppUser>();
-            var hashedPassword = hasher.HashPassword(user, "admin");
-            user.PasswordHash = hashedPassword;
+            user.PasswordHash = hasher.HashPassword(user, "Admin");
 
-            var hasAdminRole = _context.Roles.Any(roles => roles.Name == "admin");
+            var hasAdminRole = await _context.Roles.AnyAsync(role => role.Name == "Admin");
             if (!hasAdminRole)
             {
-                roleStore.CreateAsync(new IdentityRole { Name = "Admin", NormalizedName = "admin" });
+                await roleStore.CreateAsync(new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" });
             }
 
-            var hasSuperUser = _context.Users.Any(u => u.NormalizedUserName == user.UserName);
+            var hasSuperUser = await _context.Users.AnyAsync(u => u.NormalizedUserName == user.NormalizedUserName);
             if (!hasSuperUser)
             {
-                userStore.CreateAsync(user);
-                userStore.AddToRoleAsync(user, "Admin");
+                await userStore.CreateAsync(user);
+                await userStore.AddToRoleAsync(user, "Admin");
             }
 
-            _context.SaveChangesAsync();
-
-            return Task.CompletedTask;
+            await _context.SaveChangesAsync();
         }
     }
 }

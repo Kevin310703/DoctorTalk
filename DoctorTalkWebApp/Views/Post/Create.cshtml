@@ -1,6 +1,10 @@
 ﻿@model DoctorTalkWebApp.Models.Post.NewPostModel
 
-<div class="container body-content">
+@{
+    ViewData["Title"] = "Create Post";
+}
+
+<div class="container body-content mb-5">
     <div class="row sectionHeader">
         <div class="sectionHeading noBorder">
             New Post | @Model.ForumName
@@ -25,16 +29,17 @@
                 </div>
                 <form asp-action="AddPost" method="post" id="addPostForm">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label asp-for="Title"></label>
                         <input asp-for="Title" class="form-control" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label asp-for="Content">Post Content</label>
                         <textarea asp-for="Content" rows="10" class="form-control" placeholder="Write your post here."></textarea>
                         <span asp-validation-for="Content" class="text-danger"></span>
                     </div>
+
                     <button type="submit" id="submitPostBtn" class="btn btn-submitPost">
                         Submit Post
                     </button>

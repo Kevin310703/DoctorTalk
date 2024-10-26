@@ -1,55 +1,136 @@
 ﻿@model DoctorTalkWebApp.Models.ApplicationUser.ProfileListModel
+@using Microsoft.AspNetCore.Identity
 
-<div class="container body-content">
-    <div class="row sectionHeader">
-        <div class="sectionHeading">Browse Users</div>
+@{
+    ViewData["Title"] = "List User";
+}
+
+<div class="container body-content mt-5">
+    <div class="row sectionHeader mb-4">
+        <div class="col">
+            <h2 class="sectionHeading">Browse Users</h2>
+            <p class="text-muted">Explore and find more information about our doctors</p>
+        </div>
     </div>
-    <div class="row" id="forumIndexContent">
-        <table class="table table-hover" id="forumIndexTable">
-            <thead>
-                <tr>
-                    <th>
-                        Image
-                    </th>
-                    <th>
-                        Username
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    <th>
-                        Member Since
-                    </th>
-                    <th>
-                        Rating
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var profile in Model.Profiles)
-                {
-                    <tr class="userRow">
-                        <td>
-                            <div class="userProfilePic" style="background-image: url(@profile.ProfileImageUrl); background-size:100%"></div>
-                        </td>
-                        <td>
-                            <a asp-controller="Profile" asp-action="Detail" , asp-route-id="@profile.UserId">
-                                @profile.UserName
-                            </a>
-                        </td>
-                        <td>
-                            @profile.Email
-                        </td>
-                        <td>
-                            @profile.MemberSince
-                        </td>
-                        <td>
-                            @profile.UserRating
-                        </td>
-                    </tr>
-                }
 
-            </tbody>
-        </table>
+    <div class="row justify-content-center">
+        <div class="col-12 p-0">
+            <table class="table table-striped table-bordered table-hover text-center" id="userProfileIndexTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Member Since</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Profiles != null && Model.Profiles.Any())
+                    {
+                        @foreach (var profile in Model.Profiles)
+                        {
+                            <tr class="userRow">
+                                <td>
+                                    <div class="userProfilePic rounded-circle mx-auto shadow"
+                                         style="background-image: url('@profile.ProfileImageUrl?v=@DateTime.Now.Ticks');
+                                           background-size: cover;
+                                           background-position: center;
+                                           width: 50px;
+                                           height: 50px;
+                                           border: 3px solid #007bff;
+                                           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                                           transition: transform 0.2s ease-in-out;">
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="text-primary font-weight-bold text-decoration-none"
+                                       asp-controller="Profile" asp-action="Detail"
+                                       asp-route-id="@profile.UserId">
+                                        @profile.UserName
+                                    </a>
+                                </td>
+                                <td>@profile.Email</td>
+                                <td>@profile.MemberSince.ToString("MM/dd/yyyy")</td>
+                                <td>@profile.UserRating</td>
+                                <td>
+                                    <a class="btn btn-warning btn-sm"
+                                       asp-controller="Profile"
+                                       asp-action="Edit"
+                                       asp-route-id="@profile.UserId">
+                                        Edit Info
+                                    </a>
+
+                                    <a class="btn btn-primary btn-sm"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#editRoleModal-@profile.UserId">
+                                        Edit Role
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <!-- Modal to edit user role -->
+                            <div class="modal fade" id="editRoleModal-@profile.UserId" tabindex="-1" aria-labelledby="editRoleModalLabel-@profile.UserId" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form asp-action="EditUserRole" method="post">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editRoleModalLabel-@profile.UserId">Edit Role for @profile.UserName</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="UserId" value="@profile.UserId" />
+                                                <div class="mb-3">
+                                                    <label for="roleSelect-@profile.UserId" class="form-label">Select Role</label>
+                                                    <select class="form-select" id="roleSelect-@profile.UserId" name="SelectedRole">
+                                                        @foreach (var role in Model.Roles)
+                                                        {
+                                                            var isSelected = profile.Roles.Contains(role.Name) ? "selected" : "";
+                                                            <option value="@role.Name" selected="@(profile.Roles.Contains(role.Name) ? "selected" : null)">
+                                                                @role.Name
+                                                            </option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">
+                                No profiles available.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<!-- Include SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Show success message if any -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: '@TempData["SuccessMessage"]',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#007bff'
+        });
+    </script>
+}

@@ -1,34 +1,87 @@
 ﻿@model DoctorTalkWebApp.Models.Forum.AddForumModel
 
-<div class="container body-content">
-    <div class="row sectionHeader">
-        <div class="sectionHeading">
-            Create New Forum
+@{
+    ViewData["Title"] = "Create Forum";
+}
+
+<div class="container body-content mt-5">
+    <div class="row sectionHeader mb-4">
+        <div class="col">
+            <h2 class="sectionHeading">Create New Forum</h2>
+            <p class="text-muted">Start a new discussion with an exciting forum title and description!</p>
         </div>
     </div>
-    <div class="row">
-        <div id="createForumSection">
-            <form asp-action="AddForum" method="post" id="createForumForm" enctype="multipart/form-data">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title">Forum Title</label>
-                    <input asp-for="Title" class="form-control" placeholder="Choose a Forum Title" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description"></label>
-                    <input asp-for="Description" rows="1" class="form-control" placeholder="Write a brief description here.">
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div id="upload">
-                    <label>Upload Forum Image</label>
-                    <br />
-                    <label class="btn btn-default btn-file">
-                        Browse <input asp-for="ImageUpload" type="file" style="display: none;">
-                    </label>
-                </div>
-                <button type="submit" id="newFormBtn" class="btn btn-submitPost">Create Forum</button>
-            </form>
+
+    <div class="row justify-content-center">
+        <div class="col-12 p-0">
+            <div id="createForumSection" class="card shadow-lg border-0 rounded-lg p-4">
+                <form asp-action="AddForum" method="post" id="createForumForm" enctype="multipart/form-data">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <!-- Forum Title -->
+                    <div class="form-group mb-3">
+                        <label asp-for="Title" class="fw-bold">
+                            <i class="fas fa-heading"></i> Forum Title
+                        </label>
+                        <input asp-for="Title" class="form-control shadow-sm p-3 rounded" placeholder="Enter Forum Title" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <!-- Forum Description -->
+                    <div class="form-group mb-3">
+                        <label asp-for="Description" class="fw-bold">
+                            <i class="fas fa-align-left"></i> Description
+                        </label>
+                        <textarea asp-for="Description" class="form-control shadow-sm p-3 rounded" placeholder="Write a brief description here."></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group mb-3">
+                        <label class="fw-bold">
+                            <i class="fas fa-image"></i> Upload Forum Image
+                        </label>
+                        <div class="input-group">
+                            <label class="input-group-text" for="ImageUpload"><i class="fas fa-upload"></i></label>
+                            <input asp-for="ImageUpload" type="file" class="form-control shadow-sm" id="ImageUpload" accept="image/*">
+                        </div>
+                        <span asp-validation-for="ImageUpload" class="text-danger"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group text-center">
+                        <button type="submit" id="newFormBtn" class="btn btn-primary btn-lg shadow-sm rounded-pill">
+                            <i class="fas fa-plus-circle"></i> Create Forum
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Optional: Add some additional CSS for custom styling -->
+<style>
+
+    .btn-submitPost {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+
+        .btn-submitPost:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .form-group label i {
+        margin-right: 0.5rem;
+        color: #007bff;
+    }
+</style>
+

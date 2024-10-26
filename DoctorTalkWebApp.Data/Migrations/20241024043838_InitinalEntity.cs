@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DoctorTalkWebApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitinalEntity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,7 @@ namespace DoctorTalkWebApp.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -173,6 +174,38 @@ namespace DoctorTalkWebApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Doctors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Specialization = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Biography = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rank = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MemberSince = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Doctors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Doctors_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -182,6 +215,7 @@ namespace DoctorTalkWebApp.Data.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
                     ForumId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -192,6 +226,12 @@ namespace DoctorTalkWebApp.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Posts_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Posts_Forums_ForumId",
                         column: x => x.ForumId,
@@ -208,6 +248,7 @@ namespace DoctorTalkWebApp.Data.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -218,6 +259,12 @@ namespace DoctorTalkWebApp.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_PostReplies_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PostReplies_Posts_PostId",
                         column: x => x.PostId,
@@ -265,6 +312,17 @@ namespace DoctorTalkWebApp.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Doctors_UserId",
+                table: "Doctors",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostReplies_DoctorId",
+                table: "PostReplies",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PostReplies_PostId",
                 table: "PostReplies",
                 column: "PostId");
@@ -273,6 +331,11 @@ namespace DoctorTalkWebApp.Data.Migrations
                 name: "IX_PostReplies_UserId",
                 table: "PostReplies",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_DoctorId",
+                table: "Posts",
+                column: "DoctorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_ForumId",
@@ -313,10 +376,13 @@ namespace DoctorTalkWebApp.Data.Migrations
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Doctors");
 
             migrationBuilder.DropTable(
                 name: "Forums");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

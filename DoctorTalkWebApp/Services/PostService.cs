@@ -44,13 +44,24 @@ namespace DoctorTalkWebApp.Services
                 .Include(post => post.Forum);
         }
 
+        public IEnumerable<Post> GetAllPostsByUserId(string userId)
+        {
+            return _context.Posts
+                .Include(p => p.Forum)
+                .Include(p => p.User)
+                .Where(p => p.User.Id == userId)
+                .OrderByDescending(p => p.Created)
+                .ToList();
+        }
+
         public Post GetById(int id)
         {
             return _context.Posts.Where(p => p.Id == id)
                 .Include(post => post.User)
+                .Include(p => p.Doctor)
                 .Include(post => post.Replies).ThenInclude(reply => reply.User)
                 .Include(post => post.Forum)
-                .First();
+                .FirstOrDefault(); // Changed from .First() to .FirstOrDefault()
         }
 
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
@@ -80,6 +91,21 @@ namespace DoctorTalkWebApp.Services
             return _context.Forums
                 .Where(forum => id == forum.Id).First()
                 .Posts;
+        }
+
+        public PostReply GetReplyById(int replyId)
+        {
+            return _context.PostReplies
+                       .Include(r => r.User)     // Bao gồm thông tin của User (nếu cần)
+                       .Include(r => r.Doctor)   // Bao gồm thông tin của Doctor (nếu cần)
+                       .Include(r => r.Post)     // Bao gồm thông tin của Post liên quan (nếu cần)
+                       .FirstOrDefault(r => r.Id == replyId);
+        }
+
+        public async Task UpdateReply(PostReply reply)
+        {
+            _context.PostReplies.Update(reply);
+            await _context.SaveChangesAsync();
         }
     }
 }

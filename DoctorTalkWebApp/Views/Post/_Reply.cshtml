@@ -1,0 +1,121 @@
+﻿@model DoctorTalkWebApp.Models.Reply.PostReplyModel
+@using DoctorTalkWebApp.Helpers
+@inject UserManager<DoctorTalkWebAppUser> UserManager
+
+@{
+    var postId = ViewData["PostId"];
+    var nestingLevel = ViewData.ContainsKey("NestingLevel") ? (int)ViewData["NestingLevel"] : 0;
+    var indentPx = nestingLevel * 40; // Adjust the multiplier as needed
+}
+
+<div class="reply-container" style="margin-left:@indentPx px; position: relative;">
+    <div class="connector-line" style="left:@(indentPx - 20)px; display:@(nestingLevel > 0 ? "block" : "none");"></div>
+    <div class="row replyContent mb-4">
+        <div class="col-md-3 text-center replyAuthorContainer p-0">
+            <div class="postAuthorImage rounded-circle shadow-lg mb-1"
+                 style="background-image: url(@Model.AuthorImageUrl);">
+            </div>
+            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId"
+               class="text-dark fw-bold me-2 text-decoration-none">
+                @Model.AuthorName
+            </a>
+            <span class="text-muted">(@Model.AuthorRating)</span>
+            <span class="postDate text-muted small">@DateTimeHelper.GetTimeAgo(@Model.Created)</span>
+            @if (Model.IsAuthorAdmin)
+            {
+                <span class="badge bg-success ms-2">Admin</span>
+            }
+        </div>
+
+        <!-- Reply Content -->
+        <div class="col-md-9 replyContentContainer bg-light p-3 rounded shadow-sm">
+            @if (nestingLevel > 0 && Model.ParentReply != null)
+            {
+                <div class="parent-reply-quote mb-2">
+                    <strong>@Model.ParentReply.AuthorName</strong> đã viết:
+                    <blockquote class="blockquote">
+                        @Html.Raw(@Model.ParentReply.ReplyContent)
+                    </blockquote>
+                </div>
+            }
+            <div class="postContent">
+                @Html.Raw(@Model.ReplyContent)
+            </div>
+        </div>
+
+        <!-- Reply Actions -->
+        <div class="col-md-9 offset-md-3">
+            <div class="mt-2">
+                <!-- Edit Button (Only show if current user is the author of this reply) -->
+                @if (@Model.AuthorId == UserManager.GetUserId(User))
+                {
+                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editReplyModal-@Model.Id">Edit</a>
+                }
+
+                <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#replyToReplyModal-@Model.Id">Reply</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply to Reply Modal -->
+    <div class="modal fade" id="replyToReplyModal-@Model.Id" tabindex="-1" aria-labelledby="replyToReplyLabel-@Model.Id" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form asp-controller="Reply" asp-action="AddReply" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="replyToReplyLabel-@Model.Id">Reply to @Model.AuthorName</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="Id" value="@Model.Id" />
+                        <input type="hidden" asp-for="PostId" value="@postId" />
+                        <input type="hidden" name="ParentReplyId" value="@Model.Id" />
+
+                        <div class="form-group">
+                            <label for="replyContent-@Model.Id">Reply Content</label>
+                            <textarea class="form-control" id="replyContent-@Model.Id" name="ReplyContent" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Post Reply</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Reply Modal -->
+    <div class="modal fade" id="editReplyModal-@Model.Id" tabindex="-1" aria-labelledby="editReplyLabel-@Model.Id" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form asp-controller="Reply" asp-action="UpdateReply" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editReplyLabel-@Model.Id">Edit Reply</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="replyContentEdit-@Model.Id">Edit Reply Content</label>
+                            <textarea class="form-control" id="replyContentEdit-@Model.Id" name="ReplyContent" rows="5">@Model.ReplyContent</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @* Render child replies recursively *@
+    @if (Model.ChildReplies != null && Model.ChildReplies.Any())
+    {
+        foreach (var childReply in Model.ChildReplies)
+        {
+            @Html.Partial("_Reply", childReply, new ViewDataDictionary(ViewData) { { "NestingLevel", nestingLevel + 1 } })
+        }
+    }
+</div>

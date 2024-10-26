@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using DoctorTalkWebApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoctorTalkWebApp.Areas.Identity.Pages.Account
 {
@@ -26,9 +27,11 @@ namespace DoctorTalkWebApp.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<DoctorTalkWebAppUser> _signInManager;
         private readonly UserManager<DoctorTalkWebAppUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager; // Add RoleManager
         private readonly IUserStore<DoctorTalkWebAppUser> _userStore;
         private readonly IUserEmailStore<DoctorTalkWebAppUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly DoctorTalkWebAppContext _context;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
@@ -36,7 +39,8 @@ namespace DoctorTalkWebApp.Areas.Identity.Pages.Account
             IUserStore<DoctorTalkWebAppUser> userStore,
             SignInManager<DoctorTalkWebAppUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +48,7 @@ namespace DoctorTalkWebApp.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -80,6 +85,10 @@ namespace DoctorTalkWebApp.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; } // Thêm Username
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -98,6 +107,19 @@ namespace DoctorTalkWebApp.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            // Thêm các trường cho thông tin Doctor
+            [Required]
+            [Display(Name = "Full Name")]
+            public string FullName { get; set; }
+
+            [Required]
+            [Display(Name = "Specialization")]
+            public string Specialization { get; set; }
+
+            [Required]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
         }
 
 
@@ -115,15 +137,32 @@ namespace DoctorTalkWebApp.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None); // Đặt username
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
+                    // Thêm thông tin vào bảng Doctors
+                    var doctor = new Doctor
+                    {
+                        FullName = Input.FullName,
+                        Specialization = Input.Specialization,
+                        PhoneNumber = Input.PhoneNumber,
+                        UserId = user.Id, // Lấy ID người dùng mới
+                        Email = Input.Email,
+                        LicenseNumber = "0",
+                        Rating = 0,
+                        MemberSince = DateTime.Now,
+                        // Đặt các trường khác theo yêu cầu
+                    };
+                    _context.Doctors.Add(doctor);
+                    await _context.SaveChangesAsync();
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+                    await _userManager.AddToRoleAsync(user, "User"); // Thêm role User
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

@@ -1,56 +1,125 @@
 ﻿@model DoctorTalkWebApp.Models.Forum.ForumIndexModel
 
-<div class="container body-content">
-    <div class="row sectionHeader">
-        <div class="sectionHeading">Browse Forums</div>
-        <div class="sectionDescription">
-            <p>Welcome to <strong>DoctorTalk community</strong>. Posts are broadly categorized into separate forums by programming language or area of interest.</p>
-            <p>
+@{
+    ViewData["Title"] = "List Forum";
+}
+
+<div class="container body-content mt-5 mb-5">
+    <div class="row sectionHeader mb-4">
+        <div class="col">
+            <h2 class="sectionHeading">Browse Forums</h2>
+            <p class="sectionDescription">
+                Welcome to <strong>DoctorTalk community</strong>. Posts are broadly categorized into separate forums by medical specialties and health topics.
                 Please read the Forum Guidelines before creating a new post.
                 @if (!Context.User.Identity.IsAuthenticated)
                 {
-                    <span>You must be a <a asp-area="Identity" asp-page="/Account/Register">registered member</a> to create a new post.</span>
+                    <span>You must be a <a asp-area="Identity" asp-page="/Account/Register" class="text-primary">registered member</a> to create a new post.</span>
                 }
             </p>
         </div>
     </div>
-    <div class="row" id="forumIndexContent">
-        <table class="table table-hover" id="forumIndexTable">
-            <tbody>
-                @foreach (var forum in Model.ForumListing)
-                {
-                    <tr>
-                        <td>
-                            <div class="forumLogo" style="background-image: url(@forum.ForumImageUrl); background-size:100%"></div>
-                            <div class="forumData">
-                                <div class="forumTitle">
-                                    <a asp-controller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name</a>
-                                </div>
-                                <div class="forumSubTitle">
-                                    @if (forum.HasRecentPost)
-                                    {
-                                        <div class="hasRecentPost">Hot</div>
-                                    }
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="forumPostCount">
-                                @forum.NumberOfPosts Posts
-                            </div>
-                            <div class="forumMemberCount">
-                                @forum.NumberOfUsers Users
-                            </div>
-                        </td>
-                        <td>
-                            <div class="forumDescription">
-                                @forum.Description
-                            </div>
-                        </td>
-                    </tr>
-                }
 
-            </tbody>
-        </table>
+    <div class="row" id="forumIndexContent">
+        <div class="col-12 p-0">
+            <table class="table table-striped table-bordered align-middle shadow-sm" id="forumIndexTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" class="col-md-5">Forum</th>
+                        <th scope="col" class="col-md-2 text-center">Statistics</th>
+                        <th scope="col" class="col-md-5">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var forum in Model.ForumListing)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="forumLogo rounded-circle me-3"
+                                         style="background-image: url(@forum.ForumImageUrl); background-size: cover; width: 50px; height: 50px;">
+                                    </div>
+                                    <div>
+                                        <a class="forumTitle h5 text-primary" asp-controller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name</a>
+                                        @if (forum.HasRecentPost)
+                                        {
+                                            <span class="badge bg-danger ms-2">Hot</span>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="forumPostCount"><strong>@forum.NumberOfPosts</strong> Posts</div>
+                                <div class="forumMemberCount"><strong>@forum.NumberOfUsers</strong> Users</div>
+                            </td>
+                            <td>
+                                <p class="forumDescription text-muted">@forum.Description</p>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<!-- Additional Styling -->
+<style>
+    /* Style for forum listing */
+    .forumLogo {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        object-fit: cover;
+    }
+
+    .forumTitle {
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        display: block;
+    }
+
+    .forumDescription {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    /* Style for the table */
+    #forumIndexTable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* Making forumTitle text responsive for long titles */
+    .forumTitle {
+        display: inline-block;
+        max-width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Additional padding and background for a cleaner look */
+    .table {
+        border-radius: 0.5rem;
+        background-color: #f9f9f9;
+    }
+
+        .table th {
+            text-align: center;
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+    /* Hot badge styling */
+    .badge.bg-danger {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+        border-radius: 0.25rem;
+    }
+</style>

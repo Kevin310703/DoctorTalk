@@ -12,17 +12,21 @@ namespace DoctorTalkWebApp.Controllers
 {
     public class ForumController : Controller
     {
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IForum _forumService;
         private readonly IPost _postService;
         private readonly IUpload _uploadService;
         private readonly IConfiguration _configuration;
 
-        public ForumController(IForum forumService, IPost postService, IUpload uploadService, IConfiguration configuration)
+        public ForumController(IForum forumService, IPost postService, 
+            IUpload uploadService, IConfiguration configuration
+            , IWebHostEnvironment hostingEnvironment)
         {
             _forumService = forumService;
             _postService = postService;
             _uploadService = uploadService;
             _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -57,14 +61,14 @@ namespace DoctorTalkWebApp.Controllers
             var postListings = posts.Select(post => new PostListingModel
             {
                 Id = post.Id,
-                AuthorId = post.User.Id,
-                AuthorRating = post.User.Rating,
-                AuthorName = post.User.UserName,
+                AuthorId = post.User?.Id ?? Guid.Empty.ToString(),  // Handle null User
+                AuthorRating = post.Doctor?.Rating ?? 0,            // Handle null Doctor and default to 0 rating
+                AuthorName = post.User?.UserName ?? "Unknown",      // Handle null User and provide a default name
                 Title = post.Title,
                 DatePosted = post.Created.ToString(),
-                RepliesCount = post.Replies.Count(),
+                RepliesCount = post.Replies?.Count() ?? 0,          // Handle null Replies and default to 0
                 Forum = BuildForumListing(post)
-            });
+            }).ToList();
 
             var model = new ForumTopicModel
             {
@@ -96,8 +100,7 @@ namespace DoctorTalkWebApp.Controllers
 
             if (model.ImageUpload != null)
             {
-                var blockBlob = UploadForumImage(model.ImageUpload);
-                imageUri = blockBlob.Uri.AbsoluteUri;
+                imageUri = await UploadForumImage(model.ImageUpload);
             }
 
             var forum = new Forum()
@@ -113,19 +116,31 @@ namespace DoctorTalkWebApp.Controllers
             return RedirectToAction("Index", "Forum");
         }
 
-        private CloudBlockBlob UploadForumImage(IFormFile file)
+        private async Task<string> UploadForumImage(IFormFile file)
         {
-            var connectionString = _configuration.GetConnectionString("AzureStorageAccountConnectionString");
-            var container = _uploadService.GetBlobContainer(connectionString, "forum-images");
+            // Xác định thư mục lưu trữ tệp trong dự án
+            var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images/forum");
 
-            var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-            var filename = Path.Combine(parsedContentDisposition.FileName.Trim('"'));
+            // Kiểm tra và tạo thư mục nếu nó chưa tồn tại
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
 
-            var blockBlob = container.GetBlockBlobReference(filename);
+            // Tạo tên tệp duy nhất để tránh đụng độ với các tệp khác
+            var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
-            blockBlob.UploadFromStreamAsync(file.OpenReadStream()).Wait();
+            // Xác định đường dẫn tệp đầy đủ
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            return blockBlob;
+            // Lưu tệp vào thư mục của dự án
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            // Trả về đường dẫn URL của tệp, để có thể truy cập từ trình duyệt
+            return "/images/forum/" + uniqueFileName;
         }
 
         private ForumListingModel BuildForumListing(Post post)

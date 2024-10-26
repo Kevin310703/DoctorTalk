@@ -10,6 +10,7 @@ namespace DoctorTalkWebApp.Data.Interfaces
     public interface IPost
     {
         Post GetById(int id);
+        IEnumerable<Post> GetAllPostsByUserId(string userId);
         IEnumerable<Post> GetAll();
         IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery);
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
@@ -20,6 +21,8 @@ namespace DoctorTalkWebApp.Data.Interfaces
         Task Delete(int id);
         Task EditPostContent(int id, string newContent);
 
+        PostReply GetReplyById(int replyId);
         Task AddReply(PostReply reply);
+        Task UpdateReply(PostReply reply);
     }
 }

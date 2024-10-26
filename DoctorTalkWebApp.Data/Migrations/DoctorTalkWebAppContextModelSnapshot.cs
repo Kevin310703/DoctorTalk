@@ -22,6 +22,74 @@ namespace DoctorTalkWebApp.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Doctor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Biography")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MemberSince")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePicture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rank")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Specialization")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Doctors");
+                });
+
             modelBuilder.Entity("DoctorTalkWebApp.Data.DoctorTalkWebAppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -50,9 +118,6 @@ namespace DoctorTalkWebApp.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime>("MemberSince")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -69,12 +134,6 @@ namespace DoctorTalkWebApp.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ProfileImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -138,16 +197,24 @@ namespace DoctorTalkWebApp.Data.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ForumId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("ForumId");
 
@@ -170,13 +237,26 @@ namespace DoctorTalkWebApp.Data.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ParentReplyId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("ParentReplyId");
 
                     b.HasIndex("PostId");
 
@@ -322,8 +402,25 @@ namespace DoctorTalkWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Doctor", b =>
+                {
+                    b.HasOne("DoctorTalkWebApp.Data.DoctorTalkWebAppUser", "User")
+                        .WithOne("Doctor")
+                        .HasForeignKey("Doctor", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DoctorTalkWebApp.Data.Models.Post", b =>
                 {
+                    b.HasOne("Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DoctorTalkWebApp.Data.Models.Forum", "Forum")
                         .WithMany("Posts")
                         .HasForeignKey("ForumId");
@@ -332,6 +429,8 @@ namespace DoctorTalkWebApp.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId");
 
+                    b.Navigation("Doctor");
+
                     b.Navigation("Forum");
 
                     b.Navigation("User");
@@ -339,6 +438,16 @@ namespace DoctorTalkWebApp.Data.Migrations
 
             modelBuilder.Entity("DoctorTalkWebApp.Data.Models.PostReply", b =>
                 {
+                    b.HasOne("Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DoctorTalkWebApp.Data.Models.PostReply", "ParentReply")
+                        .WithMany("ChildReplies")
+                        .HasForeignKey("ParentReplyId");
+
                     b.HasOne("DoctorTalkWebApp.Data.Models.Post", "Post")
                         .WithMany("Replies")
                         .HasForeignKey("PostId");
@@ -346,6 +455,10 @@ namespace DoctorTalkWebApp.Data.Migrations
                     b.HasOne("DoctorTalkWebApp.Data.DoctorTalkWebAppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("ParentReply");
 
                     b.Navigation("Post");
 
@@ -403,6 +516,12 @@ namespace DoctorTalkWebApp.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DoctorTalkWebApp.Data.DoctorTalkWebAppUser", b =>
+                {
+                    b.Navigation("Doctor")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DoctorTalkWebApp.Data.Models.Forum", b =>
                 {
                     b.Navigation("Posts");
@@ -411,6 +530,11 @@ namespace DoctorTalkWebApp.Data.Migrations
             modelBuilder.Entity("DoctorTalkWebApp.Data.Models.Post", b =>
                 {
                     b.Navigation("Replies");
+                });
+
+            modelBuilder.Entity("DoctorTalkWebApp.Data.Models.PostReply", b =>
+                {
+                    b.Navigation("ChildReplies");
                 });
 #pragma warning restore 612, 618
         }

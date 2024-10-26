@@ -29,14 +29,16 @@ namespace DoctorTalkWebApp.Controllers
         private HomeIndexModel BuildHomeIndexModel()
         {
             var lastestPosts = _postService.GetLastestPosts(10);
+            //var lastestPosts = _postService.GetLastestPosts(10)
+            //    .Include(p => p.User).Include(p => p.Doctor);
 
             var posts = lastestPosts.Select(post => new PostListingModel
             {
                 Id = post.Id,
                 Title = post.Title,
-                AuthorName = post.User.UserName,
-                AuthorId = post.User.Id,
-                AuthorRating = post.User.Rating,
+                AuthorName = post.User?.UserName ?? "Unknown",
+                AuthorId = post.User?.Id ?? "Unknown",
+                AuthorRating = post.Doctor?.Rating ?? 0,
                 DatePosted = post.Created.ToString(),
                 Forum = GetForumListingForPost(post)
             });

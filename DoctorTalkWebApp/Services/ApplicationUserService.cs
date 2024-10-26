@@ -1,6 +1,7 @@
 ﻿using DoctorTalkWebApp.Data;
 using DoctorTalkWebApp.Data.Interfaces;
 using DoctorTalkWebApp.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoctorTalkWebApp.Services
 {
@@ -41,7 +42,9 @@ namespace DoctorTalkWebApp.Services
         public async Task UpdateUserRating(string userId, Type type)
         {
             var user = GetById(userId);
-            user.Rating = CalculateUserRating(type, user.Rating);
+            var doctor = GetDoctorByUserId(userId);
+
+            doctor.Rating = CalculateUserRating(type, doctor.Rating);
             await _context.SaveChangesAsync();
         }
 
@@ -61,9 +64,25 @@ namespace DoctorTalkWebApp.Services
         public async Task SetProfileImage(string id, Uri uri)
         {
             var user = GetById(id);
-            user.ProfileImageUrl = uri.AbsoluteUri;
+            var doctor = GetDoctorByUserId(user.Id);
+            doctor.ProfilePicture = uri.AbsoluteUri;
             _context.Update(user);
             await _context.SaveChangesAsync();
+        }
+
+        public Doctor GetDoctorById(int doctorId)
+        {
+            return _context.Doctors.FirstOrDefault(doctor => doctor.Id == doctorId);
+        }
+
+        public IQueryable<Doctor> GetAllDoctors()
+        {
+            return _context.Doctors.Include(d => d.User);
+        }
+
+        public Doctor GetDoctorByUserId(string userId)
+        {
+            return _context.Doctors.FirstOrDefault(doctor => doctor.UserId == userId);
         }
     }
 }

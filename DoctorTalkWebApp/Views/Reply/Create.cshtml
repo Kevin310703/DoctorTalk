@@ -1,6 +1,6 @@
 ﻿@model DoctorTalkWebApp.Models.Reply.PostReplyModel
 
-<div class="container body-content">
+<div class="container body-content mb-5">
     <div class="row sectionHeader">
         <div class="sectionHeading">
             Reply | @Model.PostTitle
@@ -29,7 +29,7 @@
             </div>
             <form asp-action="AddReply" method="post" id="addPostForm">
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label asp-for="ReplyContent">Reply: </label>
                     <textarea asp-for="ReplyContent" rows="20" class="form-control" placeholder="Write your reply here."></textarea>
                     <span asp-validation-for="ReplyContent" class="text-danger"></span>

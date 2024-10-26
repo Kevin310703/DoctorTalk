@@ -8,6 +8,10 @@ body {
     background-position: center;
 }
 
+.body-content {
+    margin-bottom: 100px;
+}
+
 .navLogo {
     background-image: url("/images/app-logo-s.png");
     background-size: 100%;
@@ -222,7 +226,7 @@ body {
 
 /*Custom Button*/
 .btn-back {
-    background-color: #555;
+    background-color: #1E88E5;
     color: #fff !important;
     transition: ease-in 0.1s;
     border-radius: 0px !important;
@@ -344,9 +348,22 @@ body {
 }
 
 /*User Profile*/
+.p-0 {
+    padding: 0;
+}
+
 .userProfile {
     padding: 32px 0 64px 24px;
     background-color: #fff;
+}
+
+#userProfileIndexTable th {
+    background-color: #6e86dc;
+    color: #fff;
+}
+
+#userProfileIndexTable td {
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 #userProfileImage {
@@ -384,10 +401,14 @@ body {
 }
 
 .replyContent {
-    display: table;
+    /*    display: table;
     background-color: #fff;
     border-bottom: 1px solid #aaa;
-    width: inherit;
+    width: inherit;*/
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    background-color: #fff;
 }
 
 #postReplyRow {

@@ -1,6 +1,14 @@
 ﻿@model DoctorTalkWebApp.Models.Post.PostIndexModel
+@using DoctorTalkWebApp.Helpers
+@inject UserManager<DoctorTalkWebAppUser> UserManager
 
-<div class="container-fluid">
+@{
+    ViewData["Title"] = "List Post";
+    ViewData["PostId"] = Model.Id; // Set the PostId here
+    var viewData = new ViewDataDictionary(ViewData);
+}
+
+<div class="container-fluid mb-5">
     <div class="row postHeader">
         <div class="postHeading">
             <span class="postIndexTitle" style="color: white;">
@@ -10,20 +18,54 @@
                 <a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">
                     Back to @Model.ForumName
                 </a>
+
+                @* Thêm nút Edit chỉ hiển thị cho tác giả *@
+                @if (User.Identity.IsAuthenticated && UserManager.GetUserId(User) == Model.AuthorId)
+                {
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editPostModal">Edit</button>
+                }
             </span>
+        </div>
+    </div>
+
+    <!-- Edit Post Modal -->
+    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form asp-controller="Post" asp-action="EditPost" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editPostLabel">Edit Post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="PostId" value="@Model.Id" />
+                        <div class="mb-3">
+                            <label for="postTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="postTitle" name="Title" value="@Model.Title" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="postContent" class="form-label">Content</label>
+                            <textarea class="form-control" id="postContent" name="Content" rows="10" required>@Model.PostContent</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <div class="row" id="postIndexContext">
         <div class="col-md-3 postAuthorContainer">
-            <div class="postAuthorImage" style="background-image: url(@Model.AuthorImageUrl);">
-
-            </div>
-            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId">
+            <div class="postAuthorImage mb-1" style="background-image: url(@Model.AuthorImageUrl);"></div>
+            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId" class="fw-bold text-decoration-none">
                 @Model.AuthorName
             </a>
 
-            <span class="postDate">@Model.Created</span>
+            <span class="postDate">@DateTimeHelper.GetTimeAgo(@Model.Created)</span>
+
             @if (Model.IsAuthorAdmin)
             {
                 <span class="isAdmin smaller">Admin</span>
@@ -41,7 +83,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div class="row" id="postReplyRow">
-            <span>
+            <span class="p-0">
                 <a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">
                     Post Reply
                 </a>
@@ -51,35 +93,104 @@
 
     @if (Model.Replies.Any())
     {
-        foreach(var reply in Model.Replies)
+        @* Loop through top-level replies *@
+        foreach (var reply in Model.Replies.Where(r => r.ParentReply == null))
         {
-            <div class="row replyContent">
-                <div class="col-md-3 replyAuthorContainer">
-                    <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl); background-size: 100%;"></div>
-                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
-                        <strong>@reply.AuthorName</strong>
-                    </a> (<span class="postAuthorRating">@reply.AuthorRating</span>) <br />
-                    @if (@reply.IsAuthorAdmin)
-                    {
-                        <div class="isAdmin profileLabel smaller">Admin</div>
-                        <br />
-                    }
-                    <span class="postDate">@reply.Created</span>
-                </div>
-                <div class="col-md-9 replyContentContainer">
-                    <div class="postContent">
-                        @Html.Raw(@reply.ReplyContent)
-                    </div>
-                </div>
-            </div>
+            @Html.Partial("_Reply", reply, new ViewDataDictionary(ViewData) { { "NestingLevel", 0 } })
         }
     }
     else
     {
-        <div class="noPosts">
-            <h3>
-                There are no replies to this post.<br />
-            </h3>
+        <div class="row noPosts text-center mt-1">
+            <div class="col-12">
+                <i class="fas fa-comment-slash fa-3x text-muted mb-3"></i>
+                <h3 class="text-muted">There are no replies to this post.<br /></h3>
+            </div>
         </div>
     }
 </div>
+
+<!-- CSS -->
+<style>
+    .postAuthorImage {
+        background-size: cover;
+        background-position: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid #007bff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .replyAuthorContainer {
+        text-align: center;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+        font-weight: bold;
+    }
+
+    .replyContentContainer {
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+
+    #postReplyRow {
+        display: flex;
+        justify-content: flex-start;
+        padding: 10px;
+    }
+
+    .noPosts h3 {
+        color: #6c757d;
+    }
+
+    .noPosts {
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .postDate {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #6c757d;
+        margin: 0px 5px;
+    }
+
+    .isAdmin {
+        font-size: 0.85rem;
+        color: white;
+        background-color: #28a745;
+        border-radius: 4px;
+        padding: 0.2rem 0.5rem;
+    }
+
+    .d-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+</style>
+
+<!-- Bao gồm thư viện SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Hiển thị thông báo thành công nếu có -->
+@if (TempData["EditSuccess"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: '@TempData["EditSuccess"]',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#007bff'
+        });
+    </script>
+}

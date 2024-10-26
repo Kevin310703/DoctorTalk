@@ -214,8 +214,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/Documents/GitHub/DoctorTalk/DoctorTalkWebApp/Views/Post/_Reply.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdFxfUmVwbHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/Documents/GitHub/DoctorTalk/DoctorTalkWebApp/Views/Profile/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/Documents/GitHub/DoctorTalk/DoctorTalkWebApp/Views/Profile/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/Documents/GitHub/DoctorTalk/DoctorTalkWebApp/Views/Profile/Index.cshtml]
